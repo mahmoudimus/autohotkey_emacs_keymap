@@ -45,6 +45,11 @@ SetTitleMatchMode 2
 ;; mark status. 1 = set, 0 = not set
 global m_Mark := 0
 
+;; Needed to support non english keyboard layouts
+A_ThisHotKeyVK() {
+  return "{" Format("vk{:X}", GetKeyVK(A_ThisHotkey)) "}"
+}
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Control functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -423,16 +428,16 @@ m_TransposeChars() {
 ;; C-q C-a
 ;; For MS Paint
 m_RawSelectAll() {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 ;; C-q C-n
 ;; For Web browsers
 m_RawNewWindow() {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 ;; C-q C-p
 m_RawPrintBuffer() {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Keybindings
@@ -442,35 +447,35 @@ if (m_IsEnabled()) {
     m_SetMarkCommand()
 } else {
     Send {CtrlDown}{Space}{CtrlUp}
-    ;Send %A_ThisHotkey% ; this ends up with messed up key strokes
+    ;Send % A_ThisHotkeyVK() ; this ends up with messed up key strokes
 }
 Return
 ^/::
 if (m_IsEnabled()) {
     m_Undo()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 !<::
 if (m_IsEnabled()) {
     m_BeginningOfBuffer()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 !>::
 if (m_IsEnabled()) {
     m_EndOfBuffer()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^\::
 if (m_IsEnabled()) {
     m_ToggleInputMethod()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 a::
@@ -478,10 +483,10 @@ if (m_IsMSExcel() or m_IsGoogleSheets() ) {
     if (A_PriorHotkey = "^c") {
     Send {F2}
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^a::
@@ -492,21 +497,21 @@ if (m_IsEnabled()) {
     m_MoveBeginningOfLine()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^b::
 if (m_IsEnabled()) {
     m_BackwardChar()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 !b::
 if (m_IsEnabled()) {
     m_BackwardWord()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^c::
@@ -516,24 +521,24 @@ if (m_IsEnabled()) {
 } else if (m_IsMSExcel() or m_IsGoogleSheets()) {
     m_EnableControlCPrefix()
     } else {
-        Send %A_ThisHotkey%
+        Send % A_ThisHotkeyVK()
     }
     } else {
-        Send %A_ThisHotkey%
+        Send % A_ThisHotkeyVK()
     }
     Return
 ^d::
 if (m_IsEnabled()) {
     m_DeleteChar()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^e::
 if (m_IsEnabled()) {
     m_MoveEndOfLine()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^f::
@@ -544,21 +549,21 @@ if (m_IsEnabled()) {
     m_ForwardChar()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 !f::
 if (m_IsEnabled()) {
     m_ForwardWord()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^g::
 if (m_IsEnabled()) {
     m_KeyboardQuit()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 h::
@@ -566,17 +571,17 @@ if (m_IsEnabled()) {
     if (A_PriorHotkey = "^x") {
     m_MarkWholeBuffer()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^h::
 if (m_IsEnabled()) {
     m_DeleteBackwardChar()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 i::
@@ -584,10 +589,10 @@ if (m_IsMSExcel() or m_IsGoogleSheets()) {
     if (A_PriorHotkey = "^c") {
     Send {F2}{Home}
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^j::
@@ -598,7 +603,7 @@ if (m_IsEnabled()) {
     m_NewLine()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 k::
@@ -606,24 +611,24 @@ if (m_IsEnabled()) {
     if (A_PriorHotkey = "^x") {
     m_KillBuffer()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^k::
 if (m_IsEnabled()) {
     m_KillLine()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^m::
 if (m_IsEnabled()) {
     m_NewLine()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^n::
@@ -634,14 +639,14 @@ if (m_IsEnabled()) {
     m_NextLine()
     }  
     } else {
-        Send %A_ThisHotkey%
+        Send % A_ThisHotkeyVK()
     }
     Return
 !n::
 if (m_IsEnabled()) {
     m_MoreNextLines()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^o::
@@ -649,7 +654,7 @@ if (m_IsEnabled()) {
     ;m_ToggleInputMethod()
 m_OpenLine()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^p::
@@ -662,28 +667,28 @@ if (m_IsEnabled()) {
         m_PreviousLine()
     }
     } else {
-        Send %A_ThisHotkey%
+        Send % A_ThisHotkeyVK()
     }
     Return
 !p::
 if (m_IsEnabled()) {
     m_MorePreviousLines()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^q::
 if (m_IsEnabled()) {
     m_EnableControlQPrefix()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^r::
 if (m_IsEnabled()) {
     m_ISearchBackward()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^s::
@@ -694,14 +699,14 @@ if (m_IsEnabled()) {
     m_ISearchForward()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^t::
 if (m_IsEnabled()) {
     m_TransposeChars()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 u::
@@ -709,24 +714,24 @@ if (m_IsEnabled()) {
     if (A_PriorHotkey = "^x") {
     m_Undo()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^v::
 if (m_IsEnabled()) {
     m_ScrollDown()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 !v::
 if (m_IsEnabled()) {
     m_ScrollUp()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^w::
@@ -737,28 +742,28 @@ if (m_IsEnabled()) {
     m_KillRegion()
 }
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 !w::
 if (m_IsEnabled()) {
     m_KillRingSave()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^x::
 if (m_IsEnabled()) {
     m_EnableControlXPrefix()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ^y::
 if (m_IsEnabled()) {
     m_Yank()
 } else {
-    Send %A_ThisHotkey%
+    Send % A_ThisHotkeyVK()
 }
 Return
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
