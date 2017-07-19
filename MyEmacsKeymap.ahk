@@ -46,6 +46,15 @@ SetTitleMatchMode 2
 global m_Mark := 0
 
 ;; Needed to support non english keyboard layouts
+global vk_o := "{vk4F}"
+global vk_s := "{vk53}"
+global vk_f := "{vk46}"
+global vk_a := "{vk41}"
+global vk_x := "{vk58}"
+global vk_c := "{vk43}"
+global vk_v := "{vk56}"
+global vk_z := "{vk5a}"
+
 A_ThisHotKeyVK() {
   return "{" Format("vk{:X}", GetKeyVK(A_ThisHotkey)) "}"
 }
@@ -141,12 +150,12 @@ m_EnableControlQPrefix() {
 ;; Buffers and Files ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-x C-f
 m_FindFile() {
-    Send ^o
+    Send ^%vk_o%
     global m_Mark := 0
 }
 ;; C-x C-s
 m_SaveBuffer() {
-    Send ^s
+    Send ^%vk_s%
     global m_Mark := 0
 }
 ;; C-x C-w
@@ -333,46 +342,46 @@ m_DeleteBackwardChar() {
 ;; C-k
 m_KillLine() {
     If (m_IsMSWord()) {
-        ;Send +{End}+{Left}^c{Del}
-        Send +{End}+{Left}^x
+        ;Send +{End}+{Left}^%vk_c%{Del}
+        Send +{End}+{Left}^%vk_x%
     } else {
-        ;Send +{End}^c{Del}
-        Send +{End}^x
+        ;Send +{End}^%vk_c%{Del}
+        Send +{End}^%vk_x%
     }
     global m_Mark := 0
 }
 ;; C-w
 m_KillRegion() {
-    Send ^x
+    Send ^%vk_x%
     global m_Mark := 0
 }
 ;; M-w
 m_KillRingSave() {
-    Send ^c
+    Send ^%vk_c%
     global m_Mark := 0
 }
 ;; C-y
 m_Yank() {
     if (m_IsMSExcel()) {
-        Send ^v
+        Send ^%vk_v%
         ; Tried to suppress the "Paste Options" hovering menu with {Esc}, but it
         ; turned out this would cancel out the pasting action when it is done
         ; when the cell being edited.
         ; To close the hovering menu, it would be better to simply type the {Esc}
         ; key or C-g
-        ;Send ^v{Esc}
+        ;Send ^%vk_v%{Esc}
     } else if (m_IsMSWord()) {
-        ;Send ^v{Esc}{Esc}{Esc}
-        Send ^v
+        ;Send ^%vk_v%{Esc}{Esc}{Esc}
+        Send ^%vk_v%
     } else {
-        Send ^v
+        Send ^%vk_v%
     }
     global m_Mark := 0
 }
 ;; Search ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-s
 m_ISearchForward() {
-    Send ^f
+    Send ^%vk_f%
     global m_Mark := 0
 }
 ;; C-r
@@ -382,7 +391,7 @@ m_ISearchBackward() {
 ;; Undo and Cancel ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-/
 m_Undo() {
-    Send ^z
+    Send ^%vk_z%
     global m_Mark := 0
 }
 ;; C-g
