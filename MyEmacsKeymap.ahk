@@ -46,18 +46,32 @@ SetTitleMatchMode 2
 global m_Mark := 0
 
 ;; Needed to support non english keyboard layouts
-global vk_o := "{vk4F}"
-global vk_s := "{vk53}"
-global vk_f := "{vk46}"
-global vk_a := "{vk41}"
-global vk_x := "{vk58}"
-global vk_c := "{vk43}"
-global vk_v := "{vk56}"
-global vk_z := "{vk5a}"
-
-A_ThisHotKeyVK() {
-  return "{" Format("vk{:X}", GetKeyVK(A_ThisHotkey)) "}"
-}
+global a := "{vk41}"
+global b := "{vk42}"
+global c := "{vk43}"
+global d := "{vk44}"
+global e := "{vk45}"
+global f := "{vk46}"
+global g := "{vk47}"
+global h := "{vk48}"
+global i := "{vk49}"
+global j := "{vk4A}"
+global k := "{vk4B}"
+global l := "{vk4C}"
+global m := "{vk4D}"
+global n := "{vk4E}"
+global o := "{vk4F}"
+global p := "{vk50}"
+global q := "{vk51}"
+global r := "{vk52}"
+global s := "{vk53}"
+global t := "{vk54}"
+global u := "{vk55}"
+global v := "{vk56}"
+global w := "{vk57}"
+global x := "{vk58}"
+global y := "{vk59}"
+global z := "{vk5A}"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Control functions
@@ -150,12 +164,12 @@ m_EnableControlQPrefix() {
 ;; Buffers and Files ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-x C-f
 m_FindFile() {
-    Send ^%vk_o%
+    Send ^%o%
     global m_Mark := 0
 }
 ;; C-x C-s
 m_SaveBuffer() {
-    Send ^%vk_s%
+    Send ^%s%
     global m_Mark := 0
 }
 ;; C-x C-w
@@ -342,46 +356,46 @@ m_DeleteBackwardChar() {
 ;; C-k
 m_KillLine() {
     If (m_IsMSWord()) {
-        ;Send +{End}+{Left}^%vk_c%{Del}
-        Send +{End}+{Left}^%vk_x%
+        ;Send +{End}+{Left}^%c%{Del}
+        Send +{End}+{Left}^%x%
     } else {
-        ;Send +{End}^%vk_c%{Del}
-        Send +{End}^%vk_x%
+        ;Send +{End}^%c%{Del}
+        Send +{End}^%x%
     }
     global m_Mark := 0
 }
 ;; C-w
 m_KillRegion() {
-    Send ^%vk_x%
+    Send ^%x%
     global m_Mark := 0
 }
 ;; M-w
 m_KillRingSave() {
-    Send ^%vk_c%
+    Send ^%c%
     global m_Mark := 0
 }
 ;; C-y
 m_Yank() {
     if (m_IsMSExcel()) {
-        Send ^%vk_v%
+        Send ^%v%
         ; Tried to suppress the "Paste Options" hovering menu with {Esc}, but it
         ; turned out this would cancel out the pasting action when it is done
         ; when the cell being edited.
         ; To close the hovering menu, it would be better to simply type the {Esc}
         ; key or C-g
-        ;Send ^%vk_v%{Esc}
+        ;Send ^%v%{Esc}
     } else if (m_IsMSWord()) {
-        ;Send ^%vk_v%{Esc}{Esc}{Esc}
-        Send ^%vk_v%
+        ;Send ^%v%{Esc}{Esc}{Esc}
+        Send ^%v%
     } else {
-        Send ^%vk_v%
+        Send ^%v%
     }
     global m_Mark := 0
 }
 ;; Search ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-s
 m_ISearchForward() {
-    Send ^%vk_f%
+    Send ^%f%
     global m_Mark := 0
 }
 ;; C-r
@@ -391,7 +405,7 @@ m_ISearchBackward() {
 ;; Undo and Cancel ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-/
 m_Undo() {
-    Send ^%vk_z%
+    Send ^%z%
     global m_Mark := 0
 }
 ;; C-g
@@ -437,350 +451,86 @@ m_TransposeChars() {
 ;; C-q C-a
 ;; For MS Paint
 m_RawSelectAll() {
-    Send % A_ThisHotkeyVK()
+    Send ^%a%
 }
 ;; C-q C-n
 ;; For Web browsers
 m_RawNewWindow() {
-    Send % A_ThisHotkeyVK()
+    Send ^%n%
 }
 ;; C-q C-p
 m_RawPrintBuffer() {
-    Send % A_ThisHotkeyVK()
+    Send ^%p%
+}
+m_Cc() {
+  return A_PriorHotkey = "^c"
+}
+m_Cx() {
+  return A_PriorHotkey = "^x"
+}
+m_Cq() {
+  return A_PriorHotkey = "^q"
 }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Keybindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-^Space::
-if (m_IsEnabled()) {
-    m_SetMarkCommand()
-} else {
-    Send {CtrlDown}{Space}{CtrlUp}
-    ;Send % A_ThisHotkeyVK() ; this ends up with messed up key strokes
-}
-Return
-^/::
-if (m_IsEnabled()) {
-    m_Undo()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-!<::
-if (m_IsEnabled()) {
-    m_BeginningOfBuffer()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-!>::
-if (m_IsEnabled()) {
-    m_EndOfBuffer()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^\::
-if (m_IsEnabled()) {
-    m_ToggleInputMethod()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-a::
-if (m_IsMSExcel() or m_IsGoogleSheets() ) {
-    if (A_PriorHotkey = "^c") {
-    Send {F2}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^a::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^q") {
-    m_RawSelectAll()
-} else {
-    m_MoveBeginningOfLine()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^b::
-if (m_IsEnabled()) {
-    m_BackwardChar()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-!b::
-if (m_IsEnabled()) {
-    m_BackwardWord()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^c::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_KillEmacs()
-} else if (m_IsMSExcel() or m_IsGoogleSheets()) {
-    m_EnableControlCPrefix()
-    } else {
-        Send % A_ThisHotkeyVK()
-    }
-    } else {
-        Send % A_ThisHotkeyVK()
-    }
-    Return
-^d::
-if (m_IsEnabled()) {
-    m_DeleteChar()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^e::
-if (m_IsEnabled()) {
-    m_MoveEndOfLine()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^f::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_FindFile()
-} else {
-    m_ForwardChar()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-!f::
-if (m_IsEnabled()) {
-    m_ForwardWord()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^g::
-if (m_IsEnabled()) {
-    m_KeyboardQuit()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-h::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_MarkWholeBuffer()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^h::
-if (m_IsEnabled()) {
-    m_DeleteBackwardChar()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-i::
-if (m_IsMSExcel() or m_IsGoogleSheets()) {
-    if (A_PriorHotkey = "^c") {
-    Send {F2}{Home}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^j::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_ToggleInputMethod()
-} else {
-    m_NewLine()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-k::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_KillBuffer()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^k::
-if (m_IsEnabled()) {
-    m_KillLine()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^m::
-if (m_IsEnabled()) {
-    m_NewLine()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^n::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^q") {
-    m_RawNewWindow()
-} else {
-    m_NextLine()
-    }  
-    } else {
-        Send % A_ThisHotkeyVK()
-    }
-    Return
-!n::
-if (m_IsEnabled()) {
-    m_MoreNextLines()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^o::
-if (m_IsEnabled()) {
-    ;m_ToggleInputMethod()
-m_OpenLine()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^p::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_MarkPage()
-} else if (A_PriorHotkey = "^q") {
-    m_RawPrintBuffer()
-    } else {
-        m_PreviousLine()
-    }
-    } else {
-        Send % A_ThisHotkeyVK()
-    }
-    Return
-!p::
-if (m_IsEnabled()) {
-    m_MorePreviousLines()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^q::
-if (m_IsEnabled()) {
-    m_EnableControlQPrefix()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^r::
-if (m_IsEnabled()) {
-    m_ISearchBackward()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^s::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_SaveBuffer()
-} else {
-    m_ISearchForward()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^t::
-if (m_IsEnabled()) {
-    m_TransposeChars()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-u::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_Undo()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^v::
-if (m_IsEnabled()) {
-    m_ScrollDown()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-!v::
-if (m_IsEnabled()) {
-    m_ScrollUp()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^w::
-if (m_IsEnabled()) {
-    if (A_PriorHotkey = "^x") {
-    m_WriteFile()
-} else {
-    m_KillRegion()
-}
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-!w::
-if (m_IsEnabled()) {
-    m_KillRingSave()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^x::
-if (m_IsEnabled()) {
-    m_EnableControlXPrefix()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
-^y::
-if (m_IsEnabled()) {
-    m_Yank()
-} else {
-    Send % A_ThisHotkeyVK()
-}
-Return
+#If (m_IsEnabled() && (m_IsMSExcel() || m_IsGoogleSheets()))
+^c::m_EnableControlCPrefix()
+#If (m_IsEnabled() && m_Cc() && (m_IsMSExcel() || m_IsGoogleSheets()))
+a::Send {F2}
+i::Send {F2}{Home}
+#If (m_IsEnabled() && m_Cq())
+^p::m_RawPrintBuffer()
+^a::m_RawSelectAll()
+^n::m_RawNewWindow()
+#If (m_IsEnabled() && m_Cx())
+h::m_MarkWholeBuffer()
+k::m_KillBuffer()
+u::m_Undo()
+^s::m_SaveBuffer()
+^w::m_WriteFile()
+^p::m_MarkPage()
+^f::m_FindFile()
+^j::m_ToggleInputMethod()
+^c::m_KillEmacs()
+#If (m_IsEnabled())
+^Space::m_SetMarkCommand()
+^/::m_Undo()
+!<::m_BeginningOfBuffer()
+!>::m_EndOfBuffer()
+^\::m_ToggleInputMethod()
+^a::m_MoveBeginningOfLine()
+^b::m_BackwardChar()
+!b::m_BackwardWord()
+^d::m_DeleteChar()
+^e::m_MoveEndOfLine()
+^f::m_ForwardChar()
+!f::m_ForwardWord()
+^g::m_KeyboardQuit()
+^h::m_DeleteBackwardChar()
+^j::m_NewLine()
+^k::m_KillLine()
+^m::m_NewLine()
+^n::m_NextLine()
+!n::m_MoreNextLines()
+^o::m_OpenLine()
+^p::m_PreviousLine()
+!p::m_MorePreviousLines()
+^q::m_EnableControlQPrefix()
+^r::m_ISearchBackward()
+^s::m_ISearchForward()
+^t::m_TransposeChars()
+^v::m_ScrollDown()
+!v::m_ScrollUp()
+^w::m_KillRegion()
+!w::m_KillRingSave()
+^x::m_EnableControlXPrefix()
+^y::m_Yank()
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Administration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-^!q::
-Suspend, Toggle
-Return
+#If
+^!q::Suspend, Toggle
 ^!z::
 if (m_IsEnabled()) {
     MsgBox, AutoHotkey emacs keymap is Enabled.
