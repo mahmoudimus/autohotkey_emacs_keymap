@@ -344,9 +344,19 @@ m_DeleteChar() {
     Send {Del}
     global m_Mark := 0
 }
-;; C-b
+;; M-d
+m_DeleteWord() {
+    Send ^{Del}
+    global m_Mark := 0
+}
+;; C-h
 m_DeleteBackwardChar() {
     Send {BS}
+    global m_Mark := 0
+}
+;; M-h
+m_DeleteBackwardWord() {
+    Send ^{BS}
     global m_Mark := 0
 }
 ;; C-k
@@ -499,11 +509,13 @@ u::m_Undo()
 ^b::m_BackwardChar()
 !b::m_BackwardWord()
 ^d::m_DeleteChar()
+!d::m_DeleteWord()
 ^e::m_MoveEndOfLine()
 ^f::m_ForwardChar()
 !f::m_ForwardWord()
 ^g::m_KeyboardQuit()
 ^h::m_DeleteBackwardChar()
+!h::m_DeleteBackwardWord()
 ^j::m_NewLine()
 ^k::m_KillLine()
 ^m::m_NewLine()
