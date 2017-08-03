@@ -227,22 +227,18 @@ m_PreviousLine() {
 m_ForwardWord() {
     global
     if (m_Mark) {
-        Loop 5
-        Send +{Right}
+        Send ^+{Right}
     } else {
-        Loop, 5
-        Send {Right}
+        Send ^{Right}
     }
 }
 ;; M-b
 m_BackwardWord() {
     global
     if (m_Mark) {
-        Loop, 5
-        Send +{Left}
+        Send ^+{Left}
     } else {
-        Loop, 5
-        Send {Left}
+        Send ^{Left}
     }
 }
 ;; M-n
