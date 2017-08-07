@@ -1,0 +1,19 @@
+;; googlesheets
+
+;; Checks if the active window is Google Sheets.
+;; The main purpose is to provide keybindings to edit cells as does with MS
+;; Excel.
+m_IsGoogleSheets() {
+    global
+    ;IfWinActive Google Sheets ahk_class MozillaWindowsClass
+    IfWinActive ahk_class MozillaWindowClass ; FireFox
+        Return 1
+IfWinActive Google Sheets ahk_class Chrome_WidgetWin_1 ; Chrome
+    Return 1
+	Return 0
+}
+#If (m_IsGoogleSheets())
+^c::m_EnableControlCPrefix()
+#If (m_Cc() && m_IsGoogleSheets())
+a::Send {F2}
+i::Send {F2}{Home}

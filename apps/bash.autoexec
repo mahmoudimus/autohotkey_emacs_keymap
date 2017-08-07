@@ -1,0 +1,2 @@
+;; bash
+m_IgnoreExe("bash.exe")

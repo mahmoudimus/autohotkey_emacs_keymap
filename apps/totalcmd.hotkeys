@@ -1,0 +1,9 @@
+;; totalcmd
+m_IsTC() {
+  return WinActive("ahk_exe totalcmd.exe")
+}
+#If m_IsTC()
+^t::Send ^%t%
+^/::Send ^\
+#If m_IsTC() && m_Cx()
+h::Send ^{NumpadAdd}

@@ -1,0 +1,24 @@
+;; msword
+
+;; Checks if the active window is MS Word. The main things it does:
+;;  "kill-line" sends "+{End}+{Left}^c{Del}" instead of "+{End}^c{Del}".
+;;  This is to cut out the line feed mark which is usually configured to
+;;  be displayed in the View options in MS Word.
+m_IsMSWord() {
+    global
+    IfWinActive ahk_class OpusApp
+        Return 1
+	Return 0
+}
+m_YankMSWord() {
+	;Send ^%v%{Esc}{Esc}{Esc}
+	Send ^%v%
+	global m_Mark := 0
+}
+m_KillLineMSWord() {
+	;Send +{End}+{Left}^%c%{Del}
+	Send +{End}+{Left}^%x%
+}
+#If (m_IsMSWord())
+^y::m_YankMSWord()
+^k::m_KillLineMSWord()
