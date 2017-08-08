@@ -488,4 +488,4 @@ if (m_IsEnabled()) {
     MsgBox, AutoHotkey emacs keymap is Disabled.
 }
 Return
-^!r::Reload
++^!r::Reload
