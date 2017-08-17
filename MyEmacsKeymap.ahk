@@ -357,8 +357,11 @@ m_Undo() {
 }
 ;; C-g
 m_KeyboardQuit() {
-    Send {Esc}
-    global m_Mark := 0
+    if (m_Mark) {
+      m_Mark = 0
+    } else {
+      Send {Esc}
+    }
 }
 
 ;; Input Method ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
