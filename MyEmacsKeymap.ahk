@@ -287,15 +287,7 @@ m_EndOfBuffer() {
 ;; Select, Delete, Copy & Paste ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-spc
 m_SetMarkCommand() {
-    global
-    if (m_Mark) {
-        m_Mark := 0
-        m_ForwardChar()
-        m_BackwardChar()
-        m_Mark := 1
-    } else {
-        m_Mark := 1
-    }
+    m_Mark = 1
 }
 ;; C-x h
 m_MarkWholeBuffer() {
