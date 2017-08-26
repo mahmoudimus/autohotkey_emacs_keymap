@@ -73,17 +73,12 @@ global x := "{vk58}"
 global y := "{vk59}"
 global z := "{vk5A}"
 
-;; List of applications to be ignored by this script
-;; For internal use only, use functions m_IgnoreClass, m_IgnoreExe instead
-global m_IgnoredClass := []
-global m_IgnoredExe := []
-
 ;; Call on of the following functions in application autoexec file to ignore it
 m_IgnoreClass(class) {
-  m_IgnoredClass.insert(class)
+    GroupAdd ignored, ahk_class %class%
 }
 m_IgnoreExe(exe) {
-  m_IgnoredExe.insert(exe)
+    GroupAdd ignored, ahk_exe %exe%
 }
 
 #Include %A_ScriptDir%/include/autoexec.ahki
@@ -95,17 +90,7 @@ m_IgnoreExe(exe) {
 ;; active window. "ahk_class" can be identified using Window Spy
 ;; (right-click on the AutoHotkey icon in the task bar)
 m_IsEnabled() {
-    for index, element in m_IgnoredClass
-    {
-        IfWinActive ahk_class %element%
-            Return 0
-    }
-    for index, element in m_IgnoredExe
-    {
-        IfWinActive ahk_exe %element%
-            Return 0
-    }
-    Return 1
+    Return !WinActive("ahk_group ignored")
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
