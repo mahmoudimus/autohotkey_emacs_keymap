@@ -1,0 +1,107 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; unset mark
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+m_UnsetMarkCommand() {
+    if (m_Mark == 2) {
+        m_Mark = 0
+        m_ForwardChar()
+    } else if (m_Mark == 3) {
+        m_Mark = 0
+        m_BackwardChar()
+    }
+}
+
+m_MarkForward() {
+    if (m_Mark == 1) {
+        m_Mark = 2
+    }
+}
+
+m_MarkBackward() {
+    if (m_Mark == 1) {
+        m_Mark = 3
+    }
+}
+#If WinActive("ahk_group unset_mark") && m_Cx()
+h::
+m_MarkWholeBuffer()
+m_MarkBackward()
+Return
+^p::
+m_MarkPage()
+m_MarkBackward()
+Return
+^f::m_FindFile()
+#If WinActive("ahk_group unset_mark")
+^Space::
+m_UnsetMarkCommand()
+m_SetMarkCommand()
+Return
+!<::
+m_MarkBackward()
+m_BeginningOfBuffer()
+Return
+!>::
+m_MarkForward()
+m_EndOfBuffer()
+Return
+^a::
+m_MarkBackward()
+m_MoveBeginningOfLine()
+Return
+^b::
+m_MarkBackward()
+m_BackwardChar()
+Return
+!b::
+m_MarkBackward()
+m_BackwardWord()
+Return
+^e::
+m_MarkForward()
+m_MoveEndOfLine()
+Return
+^f::
+m_MarkForward()
+m_ForwardChar()
+Return
+!f::
+m_MarkForward()
+m_ForwardWord()
+Return
+^g::
+if (m_Mark > 0) {
+    m_UnsetMarkCommand()
+} else {
+    Send {Esc}
+}
+Return
+^n::
+m_MarkForward()
+m_NextLine()
+Return
+!n::
+m_MarkForward()
+m_MoreNextLines()
+Return
+^p::
+m_MarkBackward()
+m_PreviousLine()
+Return
+!p::
+m_MarkBackward()
+m_MorePreviousLines()
+Return
+^v::
+m_ScrollDown()
+m_MarkForward()
+Return
+!v::
+m_ScrollUp()
+m_MarkBackward()
+Return
+!w::
+Send ^{Ins}
+m_UnsetMarkCommand()
+Return
