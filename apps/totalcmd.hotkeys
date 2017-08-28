@@ -25,5 +25,6 @@ v::Return
 ^/::Send ^\
 #If m_IsTC() && m_Cx()
 ^f::Send {F4}
+f::Send +{F4}
 h::Send ^{NumpadAdd}
 k::Send ^%w%               ; close folder tab
