@@ -2,6 +2,24 @@
 m_IsTC() {
   return WinActive("ahk_exe totalcmd.exe")
 }
+m_RunTortoiseProcCommand(cmd) {
+	Send +{Right} ; activate command line
+	Send tortoisegitproc /command:%cmd% /path:
+	Send ^{Enter}
+	Send {Enter}
+}
+#If m_IsTC() && A_PriorHotkey == "v"
+<::m_RunTortoiseProcCommand("pull")
+>::m_RunTortoiseProcCommand("push")
+b::m_RunTortoiseProcCommand("switch")
+d::m_RunTortoiseProcCommand("diff")
+u::m_RunTortoiseProcCommand("revert")
+i::m_RunTortoiseProcCommand("add")
+l::m_RunTortoiseProcCommand("log")
+m::m_RunTortoiseProcCommand("merge")
+v::m_RunTortoiseProcCommand("commit")
+#If m_IsTC() && m_Cx()
+v::Return
 #If m_IsTC()
 ^t::Send ^%t%
 ^/::Send ^\
