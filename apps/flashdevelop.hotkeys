@@ -3,3 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #If WinActive("ahk_exe flashdevelop.exe") && m_Cx()
 ^f::Send ^%r%
+#If WinActive("ahk_exe flashdevelop.exe") && m_Mark
+/::
+Send ^%q%
+m_Mark = 0
+return
