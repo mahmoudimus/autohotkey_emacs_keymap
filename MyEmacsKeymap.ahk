@@ -305,8 +305,7 @@ m_DeleteBackwardWord() {
 }
 ;; C-k
 m_KillLine() {
-    ;Send +{End}^%c%{Del}
-    Send +{End}^%x%
+    Send +{End}^{Ins}{Del}
     global m_Mark := 0
 }
 ;; C-w
