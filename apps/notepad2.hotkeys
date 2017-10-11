@@ -9,3 +9,11 @@ m_Mark = 0
 return
 #If WinActive("ahk_exe notepad2.exe")
 !g::Send ^%g%
+^l::
+Loop 25
+Send ^{Down}
+return
+!^l::
+Loop 25
+Send ^{Up}
+return
