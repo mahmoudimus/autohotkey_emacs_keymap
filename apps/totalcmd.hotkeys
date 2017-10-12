@@ -19,14 +19,14 @@ l::m_RunTortoiseProcCommand("log")
 m::m_RunTortoiseProcCommand("merge")
 v::m_RunTortoiseProcCommand("commit")
 #If m_IsTC() && m_Cx()
+^c::Send !{F4}
+^f::Send {F4}
+f::Send +{F4}
+h::Send ^{NumpadAdd}
+k::Send ^%w%               ; close folder tab
 v::Return
 #If m_IsTC()
 ^c::Send {F4}
 ^r::Send {F3}
 ^t::Send ^%t%
 ^/::Send ^\
-#If m_IsTC() && m_Cx()
-^f::Send {F4}
-f::Send +{F4}
-h::Send ^{NumpadAdd}
-k::Send ^%w%               ; close folder tab
