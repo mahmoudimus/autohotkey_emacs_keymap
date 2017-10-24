@@ -3,11 +3,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #If WinActive("ahk_exe flashdevelop.exe") && m_Cx()
 ^f::Send ^%r%
-#If WinActive("ahk_exe flashdevelop.exe") && m_Mark
-/::
-Send ^%q%
-m_Mark = 0
-return
 #If WinActive("ahk_exe flashdevelop.exe")
 !g::Send ^%g%
 ^l::
@@ -17,4 +12,8 @@ return
 !^l::
 Loop 25
 Send ^{Up}
+return
+!;::
+Send ^%q%
+m_Mark = 0
 return
