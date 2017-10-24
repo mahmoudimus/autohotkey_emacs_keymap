@@ -21,7 +21,7 @@ v::m_RunTortoiseProcCommand("commit")
 #If m_IsTC() && m_Cx()
 ^c::Send !{F4}
 ^f::Send {F4}
-f::Send +{F4}
+^b::Send +{F4}
 h::Send ^{NumpadAdd}
 k::Send ^%w%               ; close folder tab
 v::Return
