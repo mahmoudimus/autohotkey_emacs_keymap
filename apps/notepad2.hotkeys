@@ -1,19 +1,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; notepad2
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#If WinActive("ahk_exe notepad2.exe") && m_Mark
-/::
-Send ^%q%
-Send ^{Del}
-m_Mark = 0
-return
 #If WinActive("ahk_exe notepad2.exe")
 !g::Send ^%g%
-^l::
+^l:: 
 Loop 25
 Send ^{Down}
 return
 !^l::
 Loop 25
 Send ^{Up}
+return
+!;::
+Send ^%q%
+if (m_Mark) {
+	Send ^{Del}
+}
+m_Mark = 0
 return
