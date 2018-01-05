@@ -3,3 +3,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #If WinActive("ahk_class ShockwaveFlash")
 ^g::Send !{F4}
+F5::
+SendInput {Esc}{Esc}
+SendInput {Alt}
+SendInput {Down}
+SendInput 1
+return
