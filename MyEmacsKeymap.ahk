@@ -377,6 +377,7 @@ m_TransposeChars() {
     m_KillRegion()
     m_BackwardChar()
     m_Yank()
+    m_ForwardChar()
 }
 ;; Keys to send as they are when followed by C-q ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-q C-a
