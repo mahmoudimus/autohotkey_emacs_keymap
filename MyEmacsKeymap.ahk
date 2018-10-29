@@ -437,6 +437,7 @@ u::m_Undo()
 ^g::m_KeyboardQuit()
 ^h::m_DeleteBackwardChar()
 !h::m_DeleteBackwardWord()
+^!h::m_DeleteBackwardWord()
 ^i::Send {Tab}
 ^j::m_NewLine()
 ^k::m_KillLine()
