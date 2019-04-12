@@ -30,7 +30,5 @@ v::Return
 ^r::Send {F3}
 ^t::Send ^%t%
 ^/::Send ^\
-; goto parent directory (eq cd ..)
-^@::Send {BackSpace}
 ; goto previous directory in history
 ^z::Send !{Left}
