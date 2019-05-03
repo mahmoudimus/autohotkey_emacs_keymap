@@ -4,4 +4,3 @@
 #IfWinActive ahk_exe Telegram.exe
 !^n::Send !{Down}
 !^p::Send !{Up}
-^h::Send {Esc}
