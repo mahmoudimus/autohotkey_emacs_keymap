@@ -14,4 +14,6 @@ m_ActivateWindow(title) {
 <!<^h::m_ActivateWindow("ahk_exe chrome.exe")
 <!<^g::m_ActivateWindow("ahk_exe notepad2.exe")
 <!<^s::m_ActivateWindow("ahk_exe mintty.exe")
-
+<!<^v::m_ActivateWindow("ahk_exe vlc.exe")
+<!<^,::m_ActivateWindow("ahk_exe node.exe")
+!Tab::return
