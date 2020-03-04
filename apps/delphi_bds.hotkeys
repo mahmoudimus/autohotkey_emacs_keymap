@@ -3,6 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #If WinActive("ahk_exe bds.exe") && m_Cx()
 k::Send ^{F4}
+;; activate Parnassus Navigator
+;; You can install it with Get It by name: Navigator
 s::Send ^%g%
 #If WinActive("ahk_exe bds.exe")
 !^n::Send ^{Tab}
