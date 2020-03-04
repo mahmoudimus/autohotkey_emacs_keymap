@@ -1,0 +1,17 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; delphi
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#If WinActive("ahk_exe bds.exe") && m_Cx()
+k::Send ^{F4}
+s::Send ^%g%
+#If WinActive("ahk_exe bds.exe")
+!^n::Send ^{Tab}
+!^p::Send +^{Tab}
+
+;; goto definition
+!.::Send !{UP}
+
+;; go back from definition
+!,::Send !{Left}
+
+!F12::Send !+{F11}
