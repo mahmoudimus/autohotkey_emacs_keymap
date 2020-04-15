@@ -138,6 +138,17 @@ m_KillEmacs() {
     Send !{F4}
     global m_Mark := 0
 }
+
+;; C-M-m
+m_MaxMinWindow() {
+  WinGetActiveTitle, title
+  WinGet, maximized, MinMax, %title% 
+
+  if (maximized)
+     WinRestore, %title%
+  else
+     WinMaximize, %title%
+}
 ;; Cursor Motion ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-f
 m_ForwardChar() {
@@ -439,6 +450,7 @@ u::m_Undo()
 ^h::m_DeleteBackwardChar()
 !h::m_DeleteBackwardWord()
 ^!h::m_DeleteBackwardWord()
+^!m::m_MaxMinWindow()
 ^i::Send {Tab}
 ^j::m_NewLine()
 ^k::m_KillLine()
