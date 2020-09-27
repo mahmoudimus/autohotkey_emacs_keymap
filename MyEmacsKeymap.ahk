@@ -1,3 +1,5 @@
+Process, Priority,, Realtime
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MyEmacsKeymap.ahk
 ;; - An AutoHotkey script to simulate Emacs keybindings on Windows
