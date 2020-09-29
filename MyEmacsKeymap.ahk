@@ -1,4 +1,15 @@
 Process, Priority,, Realtime
+;; Use Ahk2Exe v1.1.33 and later to build exe
+;;
+;; https://github.com/AutoHotkey/Ahk2Exe
+;;
+;@Ahk2Exe-UpdateManifest 1
+;@Ahk2Exe-SetName         MyEmacsKeymap
+;@Ahk2Exe-SetDescription  An AutoHotkey script to simulate Emacs keybindings on Windows
+;@Ahk2Exe-SetCompanyName  MyEmacsKeymap
+;@Ahk2Exe-SetOrigFilename MyEmacsKeymap.ahk
+;@Ahk2Exe-SetMainIcon     MyEmacsKeymap.ico
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MyEmacsKeymap.ahk
